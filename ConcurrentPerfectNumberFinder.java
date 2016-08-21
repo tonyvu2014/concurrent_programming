@@ -1,7 +1,5 @@
 import java.lang.IllegalArgumentException;
 import java.util.concurrent.*;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ConcurrentPerfectNumberFinder {
@@ -44,7 +42,6 @@ public class ConcurrentPerfectNumberFinder {
 	private static void findPerfectNumberInParallel(int n) {
 		System.out.println("Perfect numbers from 1 to " + n + ":");
         ExecutorService executor =  Executors.newFixedThreadPool(3);
-		Map<Integer, Future<Boolean>> resultMap = new HashMap<Integer, Future<Boolean>>();
 		
 		for (int i=2; i<=n;i++) {
 			Callable<Boolean> perfectNumberCheckerRunner = new PerfectNumberChecker(i);
@@ -63,7 +60,6 @@ public class ConcurrentPerfectNumberFinder {
 		}		
 		
 		try {
-		    System.out.println("Attempt to shutdown executor");
 		    executor.shutdown();
 		    executor.awaitTermination(5, TimeUnit.SECONDS);
 		}
@@ -75,7 +71,6 @@ public class ConcurrentPerfectNumberFinder {
 		        System.err.println("Cancel non-finished tasks");
 		    }
 		    executor.shutdownNow();
-		    System.out.println("Shutdown finished");
 		}
 		
 	}
