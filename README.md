@@ -8,6 +8,7 @@ This repository contains some programs which use concurrent processing written i
 To run the program:
 
 *1. javac ConcurrentPerfectNumberFinder.java*
+
 *2. java ConcurrentPerfectNumberFinder <number>*
 
 Some results from running the program:
