@@ -7,8 +7,8 @@ This repository contains some programs which use concurrent processing written i
 
 To run the program:
 
-1. javac ConcurrentPerfectNumberFinder.java
-2. java ConcurrentPerfectNumberFinder <number>
+*1. javac ConcurrentPerfectNumberFinder.java*
+*2. java ConcurrentPerfectNumberFinder <number>*
 
 Some results from running the program:
 
@@ -44,9 +44,9 @@ Running findPerfectNumberInParallel() in 1808 ms
 
 As you can see, multithreading codes ran slower with small number due to the overhead of maintaining additional objects and tasks. Only for big number, multithreading program shows performance enhancement.
 
-'concurrent_perfect_number_finder.py' is the equivalent program in python. In Python, because of GIL, we cannot have multithreading, so to achieve parallelism, we will create multiple processes using multiprocessing module. Running the script with:
+`concurrent_perfect_number_finder.py` is the equivalent program in python. In Python, because of GIL, we cannot have multithreading, so to achieve parallelism, we will create multiple processes using multiprocessing module. Running the script with:
 
-python concurrent_perfect_number_finder.py <number>
+*python concurrent_perfect_number_finder.py <number>*
 
 Example outputs:
 
