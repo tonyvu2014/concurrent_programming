@@ -9,7 +9,7 @@ To run the program:
 
 **1. javac ConcurrentPerfectNumberFinder.java**
 
-**2. java ConcurrentPerfectNumberFinder <number>**
+**2. java ConcurrentPerfectNumberFinder 500**
 
 Some results from running the program:
 
@@ -47,7 +47,7 @@ As you can see, multithreading codes ran slower with small number due to the ove
 
 `concurrent_perfect_number_finder.py` is the equivalent program in python. In Python, because of GIL, we cannot have multithreading, so to achieve parallelism, we will create multiple processes using multiprocessing module. Running the script with:
 
-**python concurrent_perfect_number_finder.py <number>**
+**python concurrent_perfect_number_finder.py 500**
 
 Example outputs:
 
