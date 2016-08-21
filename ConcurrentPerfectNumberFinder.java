@@ -1,5 +1,7 @@
 import java.lang.IllegalArgumentException;
 import java.util.concurrent.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ConcurrentPerfectNumberFinder {
@@ -42,22 +44,27 @@ public class ConcurrentPerfectNumberFinder {
 	private static void findPerfectNumberInParallel(int n) {
 		System.out.println("Perfect numbers from 1 to " + n + ":");
         ExecutorService executor =  Executors.newFixedThreadPool(3);
+		Map<Integer, Future<Boolean>> resultMap = new HashMap<Integer, Future<Boolean>>();
 		
 		for (int i=2; i<=n;i++) {
 			Callable<Boolean> perfectNumberCheckerRunner = new PerfectNumberChecker(i);
 			Future<Boolean> checkResultFuture = executor.submit(perfectNumberCheckerRunner);
+			resultMap.put(i, checkResultFuture);
+		}		
+		
+		for (Integer key : resultMap.keySet()) {
 			try {
-				if (checkResultFuture.get()) {
-					System.out.println(i);
+				if (resultMap.get(key).get()) {
+					System.out.println(key);
 				}
 			} catch (ExecutionException e) {
 			    System.out.println("ExecutionException()");
 			} catch (InterruptedException e) {
 			    System.out.println("InterruptedException()");				
 			} catch (CancellationException e) {
-			    System.out.println("CancellationException()");				
+				System.out.println("InterruptedException()");
 			}
-		}		
+		}
 		
 		try {
 		    executor.shutdown();
@@ -87,11 +94,7 @@ public class ConcurrentPerfectNumberFinder {
 			}
 		}	
 		
-		if (sum == number) {
-			return true;
-		} 
-		
-		return false;
+		return (sum == number);
 		
 	}
 	
@@ -116,10 +119,6 @@ class PerfectNumberChecker implements Callable<Boolean> {
 			}
 		}	
 	
-		if (sum == number) {
-			return true;
-		} 
-	
-		return false;
+		return (sum == number);
 	}
 }
