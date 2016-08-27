@@ -33,7 +33,7 @@ def find_perfect_number(limit):
             
 def find_perfect_number_in_parallel(limit): 
     print "Perfect numbers from 1 to {}:".format(limit)           
-    pool_size = multiprocessing.cpu_count() * 2
+    pool_size = multiprocessing.cpu_count()*2
     process_pool = multiprocessing.Pool(processes=pool_size)
     check_perfect_number_results = process_pool.map(is_perfect_number, range(1, limit+1))
     for i, result in enumerate(check_perfect_number_results):
