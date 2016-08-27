@@ -86,3 +86,30 @@ Some other interesting findings:
 - With the same input and same algorithm, java is faster than python
 - I tried to play with the number of processes by changing the value of pool_size in `pool_size = multiprocessing.cpu_count()*2`. Using the multiple of 3, 4 or higher does not add any performance advantage. 
 
+`ParallelSort.java` is a program to test out the `Arrays.parallelSort()` from Java 8. You need to compile and run it on Java 1.8 version. Here are the comparision in running time between normal `Arrays.sort()` and `Arrays.parallelSort()`:
+
+```
+$ /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/bin/java ParallelSort 10000
+Running Arrays.sort() in 3 ms
+Running Arrays.parallelSort() in 4 ms
+ ```
+ 
+ ```
+ $ /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/bin/java ParallelSort 100000
+ Running Arrays.sort() in 25 ms
+ Running Arrays.parallelSort() in 27 ms
+ ```
+ 
+ ```
+ $ /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/bin/java ParallelSort 1000000
+ Running Arrays.sort() in 63 ms
+ Running Arrays.parallelSort() in 83 ms
+ ```
+ 
+ ```
+ $ /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/bin/java ParallelSort 10000000
+ Running Arrays.sort() in 381 ms
+ Running Arrays.parallelSort() in 243 ms
+ ```
+
+Again, only with very big input, parallelSort() is faster than normal sort() method. For not so big input, it is even slower.
