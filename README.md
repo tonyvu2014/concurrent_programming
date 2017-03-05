@@ -112,4 +112,6 @@ Running Arrays.parallelSort() in 4 ms
  Running Arrays.parallelSort() in 243 ms
  ```
 
-Again, only with very big input, parallelSort() is faster than normal sort() method. For not so big input, it is even slower.
+Again, only with very big input, parallelSort() is faster than normal sort() method. For not so big input, it is even slower.y
+
+`Schedule.java` is a simple program to understand the differences between schedule(), scheduleAtFixedRate() and scheduleWithFixedDelay()
