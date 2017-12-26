@@ -3,7 +3,7 @@ Concurrent programming experiment
 
 This repository contains some programs which use concurrent processing written in `java`  and `python`.
 
-`ConcurrentPerfectNumberFinder.java` is a simple java program to find list of perfect numbers from 1 to a certain limit. It demonstrate how to use Executor Framework, Callable and Future for multithreading. It also compares the running time with normal method without concurrrency.
+`ConcurrentPerfectNumberFinder.java` is a simple java program to find list of perfect numbers from 1 to a certain limit. It demonstrate how to use Executor Framework, Callable and Future for multithreading. It also compares the running time with normal methods without concurrrency.
 
 To run the program:
 
@@ -43,7 +43,7 @@ Perfect numbers from 1 to 50000:
 Running findPerfectNumberInParallel() in 1808 ms
 ```
 
-As you can see, multithreading codes ran slower with small number due to the overhead of maintaining additional objects and tasks. Only for big number, multithreading program shows performance enhancement.
+As you can see, multithreading codes ran slower with small number due to the overhead of maintaining additional objects and tasks. Only for big numbers, multithreading program shows performance enhancement.
 
 `concurrent_perfect_number_finder.py` is the equivalent program in python. In Python, because of GIL, we cannot have multithreading, so to achieve parallelism, we will create multiple processes using multiprocessing module. Running the script with:
 
@@ -81,12 +81,12 @@ Perfect numbers from 1 to 50000:
 Running find_perfect_number_in_parallel() in 46.4370360374 seconds
 ```
 
-We observe the same phenomenon: multi-processing is slower for small number and only faster for significant input. 
+We observe the same phenomenon: multi-processing is slower for small numbers and only faster for significant inputs. 
 Some other interesting findings:
 - With the same input and same algorithm, java is faster than python
 - I tried to play with the number of processes by changing the value of pool_size in `pool_size = multiprocessing.cpu_count()*2`. Using the multiple of 3, 4 or higher does not add any performance advantage. 
 
-`ParallelSort.java` is a program to test out the `Arrays.parallelSort()` from Java 8. You need to compile and run it on Java 1.8 version. Here are the comparision in running time between normal `Arrays.sort()` and `Arrays.parallelSort()`:
+`ParallelSort.java` is a program to test out the `Arrays.parallelSort()` from Java 8. You need to compile and run it on Java 1.8 version. Here are the comparisions in running time between normal `Arrays.sort()` and `Arrays.parallelSort()`:
 
 ```
 $ /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/bin/java ParallelSort 10000
@@ -112,6 +112,20 @@ Running Arrays.parallelSort() in 4 ms
  Running Arrays.parallelSort() in 243 ms
  ```
 
-Again, only with very big input, parallelSort() is faster than normal sort() method. For not so big input, it is even slower.y
+Again, only with very big input, parallelSort() is faster than normal sort() method. For not so big input, it is even slower.
 
-`Schedule.java` is a simple program to understand the differences between schedule(), scheduleAtFixedRate() and scheduleWithFixedDelay()
+`Schedule.java` is a simple program to understand the differences between schedule(), scheduleAtFixedRate() and scheduleWithFixedDelay(). Sample output when you run the program:
+
+```
+Called by scheduleAtFixedRate at: 2017/12/26 11:43:06
+Called by scheduleWithFixedDelay at: 2017/12/26 11:43:08
+Called by schedule at: 2017/12/26 11:43:11
+Called by scheduleAtFixedRate at: 2017/12/26 11:43:11
+Called by scheduleWithFixedDelay at: 2017/12/26 11:43:15
+Called by scheduleAtFixedRate at: 2017/12/26 11:43:17
+Called by scheduleAtFixedRate at: 2017/12/26 11:43:21
+Called by scheduleWithFixedDelay at: 2017/12/26 11:43:23
+Called by scheduleAtFixedRate at: 2017/12/26 11:43:26
+```
+
+As you can see, `schedule()` will run only once after a delay specified, `scheduleAtFixedRate()` will run immediately and start periodically after every 5 seconds, `scheduleWithFixedDelay` will also run repeatedly but only start a new run 5 seconds after the last run terminates.
